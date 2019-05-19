@@ -12,8 +12,7 @@ import ToDo from "./ToDo";
 
 const {height, width} = Dimensions.get("window");
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   state={
     newToDo:""
   }
@@ -33,7 +32,7 @@ export default class App extends Component<Props> {
             autoCorrect={false}
             />
             <ScrollView contentContainerStyle={styles.toDos}>
-              <ToDo />
+              <ToDo text={"hello I am todo"}/>
             </ScrollView>
         </View>
       </View>
