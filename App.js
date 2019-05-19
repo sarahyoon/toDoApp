@@ -17,13 +17,23 @@ const {height, width} = Dimensions.get("window");
 export default class App extends Component {
   state={
     newToDo:"",
-    loadedToDos:false
+    loadedToDos:false,
+    toDos:{}
   };
-  componentDidMount=() =>{
-    this._loadToDos();
+  // componentDidMount=(loadedToDos) =>{
+  //   this._loadToDos();
+  //   if(!loadedToDos){
+  //     return SplashScreen.hide();
+  //   }
+    
+  // }
+  componentDidMount()
+  {
+    SplashScreen.hide();
   }
   render() {
-    const {newToDo, loadedToDos} = this.state;
+    const {newToDo, loadedToDos, toDos} = this.state;
+    console.log(toDos);
     // if(!loadedToDos){
     //   return <SplashScreen>;
     // }
@@ -43,7 +53,7 @@ export default class App extends Component {
             onSubmitEditing={this._addToDo}
             />
             <ScrollView contentContainerStyle={styles.toDos}>
-            <ToDo text={"hello i am to do"}/>
+            {Object.values(toDos).map(toDo => <ToDo key={ToDo.id}{...toDo} deleteToDo={this._deleteToDo} />)}
             </ScrollView>
         </View>
       </View>
@@ -86,6 +96,17 @@ export default class App extends Component {
         return {...newState};
       });
     }
+  };
+  _deleteToDo=(id)=>{
+    this.setState(prevState=>{
+      const toDos = prevState.toDos;
+      delete toDos[id];
+      const newState = {
+        ...prevState,
+        ...toDos
+      };
+      return {...newState};
+    });
   };
 }
 
