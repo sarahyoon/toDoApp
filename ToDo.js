@@ -23,7 +23,7 @@ export default class ToDo extends Component{
             {isEditing ? 
             (<TextInput 
             style={
-                [styles.input, styles.text, isCompleted ? styles.completeText : styles.unCompletedText]} 
+                [styles.text, styles.input,  isCompleted ? styles.completeText : styles.unCompletedText]} 
             value={toDoValue}
             multiline={true}
             onChangeText={this._controlInput} 
@@ -135,8 +135,9 @@ const styles=StyleSheet.create({
         marginHorizontal:10
     },
     input:{
-        marginVertical:20,
+        marginVertical:15,
         width:width/2,
+        paddingBottom:5
     }
 
 });
